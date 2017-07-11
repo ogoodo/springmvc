@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 
+http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+ 
+ <!-- 
+	 由于使用了Spring，所以Tomcat启动的时候默认会去WEB-INF下找applicationContext.xml，
+	 所以放一个空的applicationContext.xml到WEB-INF下
+  -->
+</beans>

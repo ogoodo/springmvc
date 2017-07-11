@@ -31,6 +31,10 @@ public class HelloWorldController {
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("msg", "我接到ajax请求了！！！");
         map.put("name", name);
+        
+        int kk = 100;
+        int tt = 0;
+        int ss = kk/tt;
           
         return map;  
     }  

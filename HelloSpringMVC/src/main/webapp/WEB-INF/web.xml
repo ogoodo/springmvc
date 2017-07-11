@@ -5,7 +5,39 @@
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	
 	<display-name>Spring Web MVC Hello World Application</display-name>
-	
+
+	  <!-- 404错误拦截 -->
+	  <error-page>
+	    <error-code>404</error-code>
+	    <location>/error404.jsp</location>
+	  </error-page>
+	  <!-- 500错误拦截 -->
+	  <error-page>
+	    <error-code>500</error-code>
+	    <location>/error500.jsp</location>
+	  </error-page>
+
+	<!-- 加载spring的配置文件，例如hibernate、jms等集成 -->
+	<!-- <context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	    		classpath:applicationContext*.xml;
+	  	</param-value>
+	</context-param> -->
+  
+
+  
+	<!-- 使用这两个listener要放个空的applicationContext.xml到WEB-INF/目录下,否则会报错 -->
+    <!-- 该监听器将在Web容器启动时激活Spring -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+ 
+    <!-- 处理由JavaBeans,Introspector的使用而引起的缓冲泄露,建议配置此监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
 	<servlet>
 		<servlet-name>spring</servlet-name>
 			<servlet-class>
@@ -35,7 +67,7 @@ servers/tomcat***/server.xml 设置支持utf-8编码  否则get请求会乱码
    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>    
     <init-param>        
        <param-name>encoding</param-name>        
-       <param-value>utf-8</param-value>    
+       <param-value>UTF-8</param-value>    
     </init-param>    
     <init-param>        
        <param-name>forceEncoding</param-name>        

@@ -14,12 +14,27 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
     >
 
+	<!-- 指定Sping组件扫描的基本包路径 -->
 	<context:component-scan base-package="com.yiibai" />
+	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />
 <!-- 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
  -->
+ 
+	 <!-- 配置拦截器 -->
+	<mvc:interceptors>
+	   <mvc:interceptor>
+	       <mvc:mapping path="/ajaxTest" />
+	        <bean class="com.yiibai.interceptor.TestInterceptor2" />
+	    </mvc:interceptor>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/*" />
+	        <bean class="com.yiibai.interceptor.TestInterceptor1" />
+	    </mvc:interceptor>
+	</mvc:interceptors>
+
     <!-- 启动 Spring json转换 -->  
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
@@ -37,18 +52,19 @@
         </property>  
     </bean>
 
- 
+ 	<!-- JSP视图解析器-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <property name="prefix" value="/WEB-INF/pages/" />
 	    <property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- 配置上传文件数据解析器 -->
 	<!-- 文件上传 begin -->
 	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->   
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
         <!-- 指定所上传文件的总大小不能超过200000KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->   
         <property name="maxUploadSize" value="200000000"/>   
-    </bean>   
+    </bean>
     <!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->   
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">   
         <property name="exceptionMappings">   
@@ -64,5 +80,10 @@
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/" cache-period="31556926"/>  
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/" cache-period="31556926"/>  
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/" cache-period="31556926"/>  
-  
+
+ 
+    <!-- 定义全局异常处理器, 只有一个全局异常处理器起作用 -->
+	<bean id="exceptionResolver2" class="com.yiibai.globalexception.OverallExceptionResolver"></bean>
+	<!--  -->
+
 </beans>
