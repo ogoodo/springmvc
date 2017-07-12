@@ -85,11 +85,11 @@
 		    <artifactId>slf4j-api</artifactId>  
 		    <version>1.7.21</version>  
 		</dependency> -->
-		<dependency>  
+		<!-- <dependency>  
 		    <groupId>org.slf4j</groupId>  
 		    <artifactId>slf4j-log4j12</artifactId>  
 		    <version>1.7.21</version>  
-		</dependency>
+		</dependency> -->
 		
 		<!-- logback -->
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
@@ -99,11 +99,11 @@
 			logback-classic：是log4j的一个 改良版本。此外logback-classic完整实现SLF4J API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging
 		 	logback-access：访问模块与Servlet容器集成提供通过Http来访问日志的功能
 		 -->
-		<!-- <dependency>
+		<dependency>
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-classic</artifactId>
 		    <version>1.2.3</version>
-		</dependency> -->
+		</dependency>
  		<!-- <dependency>
 			  <groupId>ch.qos.logback</groupId>
 			  <artifactId>logback-core</artifactId>
@@ -114,6 +114,12 @@
 			  <artifactId>logback-access</artifactId>
 			  <version>1.2.3</version>
 		</dependency> -->
+		<dependency>  
+	      <groupId>org.logback-extensions</groupId>  
+	      <artifactId>logback-ext-spring</artifactId>  
+	      <version>0.1.2</version>  
+	      <scope>compile</scope>  
+	    </dependency>
 
 	</dependencies>
 	
