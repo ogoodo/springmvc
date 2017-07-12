@@ -1,5 +1,7 @@
 package com.yiibai.springmvc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,13 +11,19 @@ import java.util.Map;
 
 @Controller
 public class HelloWorldController {
- 
+
+	private static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+	
     @RequestMapping("/hello")
     @ResponseBody
     public String hello(Model model) {
          
         model.addAttribute("greeting", "Hello Spring MVC add by cxb2");
         
+        logger.info("请求登录");
+        logger.debug("debug");
+        logger.warn("warn");
+
         return"helloworld";
          
     }
@@ -31,10 +39,6 @@ public class HelloWorldController {
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("msg", "我接到ajax请求了！！！");
         map.put("name", name);
-        
-        int kk = 100;
-        int tt = 0;
-        int ss = kk/tt;
           
         return map;  
     }  

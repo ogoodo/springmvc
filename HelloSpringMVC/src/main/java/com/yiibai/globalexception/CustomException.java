@@ -1,5 +1,6 @@
 package com.yiibai.globalexception;
 
+@SuppressWarnings("serial")
 public class CustomException extends Exception {
     private String message;
     

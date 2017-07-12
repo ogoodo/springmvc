@@ -10,11 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class OverallExceptionResolver implements HandlerExceptionResolver {
 
-//	public ModelAndView resolveException(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
     /**
      * 进行全局异常的过滤和处理
      */

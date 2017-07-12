@@ -22,7 +22,6 @@ public class TestInterceptor1 implements HandlerInterceptor {
 
 	// preHandle：在Controller执行之前，执行方法里面的内容，注意该方法是有返回值的，当方法返回false时整个请求就结束了
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("TestInterceptor1.preHandle()");
         return true;
 	}
