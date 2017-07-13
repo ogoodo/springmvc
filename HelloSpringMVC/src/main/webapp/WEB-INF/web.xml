@@ -1,8 +1,10 @@
-<web-app id="WebApp_ID" version="2.4" 
-	xmlns="http://java.sun.com/xml/ns/j2ee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
-	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Java Servlet Specification version 3.1 final document has an old example 
+	of only version 2.5. This website (http://antoniogoncalves.org/2013/06/04/java-ee-7-deployment-descriptors/) 
+	provided the updated example of the web-app tag -->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
 	
 	<display-name>Spring Web MVC Hello World Application</display-name>
 
@@ -19,6 +21,7 @@
         <param-value> /WEB-INF/logback.xml</param-value>  
     </context-param>  
     <listener>
+    		<description>加载logback配置文件的</description>
 		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>
 	<!--如果放两个项目实例此属性要设置，而且两个项目param-value值的不能相同,log4j和logback都要设置，这点很容易忽略 -->
