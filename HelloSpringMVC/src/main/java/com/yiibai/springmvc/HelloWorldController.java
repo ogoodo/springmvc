@@ -32,8 +32,7 @@ public class HelloWorldController {
     // @RequestMapping(value="/ajaxTest", produces="application/json")
     @RequestMapping(value="/ajaxTest")  
     @ResponseBody
-    public Map<String,Object> ajaxTest(String name,String password)  
-    {  
+    public Map<String,Object> ajaxTest(String name,String password) {  
         System.out.println("name:"+name+",password:"+password);  
           
         Map<String,Object> map=new HashMap<String,Object>();

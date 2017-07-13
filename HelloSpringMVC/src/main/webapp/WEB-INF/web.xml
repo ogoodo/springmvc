@@ -21,7 +21,7 @@
         <param-value> /WEB-INF/logback.xml</param-value>  
     </context-param>  
     <listener>
-    		<description>加载logback配置文件的</description>
+    		<description>加载logback配置文件的 要引用maven包: logback-ext-spring</description>
 		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>
 	<!--如果放两个项目实例此属性要设置，而且两个项目param-value值的不能相同,log4j和logback都要设置，这点很容易忽略 -->
