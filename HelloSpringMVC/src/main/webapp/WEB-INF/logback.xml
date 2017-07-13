@@ -92,7 +92,7 @@
     </appender>
 
 	<!--日志异步到数据库 -->  
-    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+    <!-- <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
         <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource"> 
            <dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
               <driverClass>com.mysql.jdbc.Driver</driverClass>
@@ -101,7 +101,7 @@
               <password>root</password>
             </dataSource>
         </connectionSource>
-    </appender>
+    </appender> -->
 
     <logger name="log.sync" level="DEBUG" addtivity="true">
         <appender-ref ref="SYNC_FILE" />

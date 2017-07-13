@@ -138,6 +138,20 @@
 		            <target>1.8</target>
 		        </configuration>
 		    </plugin>
+		    <!-- tomcat插件直接使用，就不要在下载tomcat服务器了 -->
+		    <!-- 参考: http://feitianbenyue.iteye.com/blog/1669036
+		    		run > run configurations > new maven build ( 选择workspace, tomcat7:run)  -->
+		    <plugin>
+		          <groupId>org.apache.tomcat.maven</groupId>
+		          <artifactId>tomcat7-maven-plugin</artifactId>
+		          <version>2.2</version>
+		          <configuration>      
+					    <hostName>localhost</hostName> 
+					    <port>8080</port>
+					    <path>/</path> 
+					    <uriEncoding>UTF-8</uriEncoding>
+				  </configuration>
+	        </plugin>
 	    </plugins>
   </build>
 </project>
