@@ -9,7 +9,28 @@
 	<display-name>Spring Web MVC Hello World Application</display-name>
 
 	<!-- 配置log4j begin -->
-
+	<!-- <context-param>     
+	      <param-name>log4jConfigLocation</param-name>     
+	      <param-value>/WEB-INF/log4j.xml</param-value>     
+	</context-param>
+	<context-param> 
+	 	<description>配置log4j.xml变量，如果需要动态的就使用下面方式，使用方法${name}</description>
+	    <param-name>controller</param-name> 
+	    <param-value>controller-log</param-value> 
+	</context-param> 
+	<context-param> 
+	    <param-name>loggingLevel</param-name> 
+	    <param-value>info</param-value> 
+	</context-param>
+     <context-param>  
+	 	 <description>log4jRefreshInterval为100000表示 开一条watchdog线程每10秒扫描一下配置文件的变化</description>
+         <param-name>log4jRefreshInterval</param-name>  
+         <param-value>100000</param-value>  
+     </context-param>
+	 <listener>
+	 	<description>加载log4j配置文件</description>
+	    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	 </listener> -->
 	<!-- 配置log4j end -->
  
    	<!-- logback begin -->
@@ -21,17 +42,18 @@
         <param-value> /WEB-INF/logback.xml</param-value>  
     </context-param>  
     <listener>
+    		<description>如果要使用默认的,就注释掉本listener, logback.xml文件放在src/main/resources下面</description>
     		<description>加载logback配置文件的 要引用maven包: logback-ext-spring</description>
 		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>
-	<!--如果放两个项目实例此属性要设置，而且两个项目param-value值的不能相同,log4j和logback都要设置，这点很容易忽略 -->
-    <!-- <context-param>
-       <param-name>webAppRootKey</param-name>
-       <param-value>webapplogback.root</param-value>
+    <context-param>
+		<description>如果放两个项目实例此属性要设置，而且两个项目param-value值的不能相同,log4j和logback都要设置，这点很容易忽略</description>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapplogback.root</param-value>
     </context-param>
 	<listener>
 	    <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
-	</listener> -->
+	</listener>
   	<!-- logback end -->
  
 	  <!-- 404错误拦截 -->

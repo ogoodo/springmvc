@@ -20,9 +20,11 @@ public class HelloWorldController {
          
         model.addAttribute("greeting", "Hello Spring MVC add by cxb2");
         
-        logger.info("请求登录2");
-        logger.debug("debug");
+        logger.error("error");
         logger.warn("warn");
+        logger.info("info");
+        logger.debug("debug");
+        logger.trace("trace");
 
         return"helloworld";
          
