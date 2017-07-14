@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,16 +23,20 @@ public class ValidController {
 
 	@Autowired
     private ResourceBundleMessageSource messageSource;
+//	private ReloadableResourceBundleMessageSource messageSource;
 	
 	/**
 	 * 验证:  http://localhost:8080/HelloSpringMVC/valid?name=chen&age=35
-	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1
+	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1&siteLanguage=en_US
+	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1&siteLanguage=zh_CN
 	 */
 	@ResponseBody
 	@RequestMapping(value="/valid")
 	public Map<String,Object> saveRegistration(@Valid User user, BindingResult result, Locale locale){
 		
+		Locale locale2 = LocaleContextHolder.getLocale();
         System.out.println("testi18n:" + messageSource.getMessage("user.id.null", null, locale));
+        System.out.println("当前国际化:" + locale2 + ", " + locale);
 
 		if(result.hasErrors()) {
 	        Map<String,Object> map=new HashMap<String,Object>(); 

@@ -18,11 +18,25 @@
 	<context:component-scan base-package="com.ogoodo" />
 	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />
-	<!-- <mvc:annotation-driven  validator="validator" />
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
-      <property name="validationMessageSource" ref="messageSource"/>
-    </bean> -->
+	
+    
+<!--     <mvc:annotation-driven validator="validator" conversion-service="formatService" />  
+   
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>  
+        指定国际化配置文件 不设置则默认为classpath下的 ValidationMessages.properties  
+        <property name="validationMessageSource" ref="messageSource"/>  
+    </bean>  --> 
+<!-- formatter转换配置 -->  
+<!--     <bean id="formatService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">  
+        <property name="formatters">  
+            <set>  
+                <bean class="com.sky.locale.demo.formatter.MyDateFormatter" />  
+                <bean class="com.sky.locale.demo.formatter.MyCurrencyFormatter" />  
+            </set>  
+        </property>  
+	</bean> -->
+
 <!-- 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -109,13 +123,14 @@
         </property>  
 	</bean> -->
 
-    <!--国际化：在MVC配置文件中，配置国际化属性文件：-->
+    <!-- 国际化 begin -->
     <!-- 参考: http://www.xdemo.org/spring-i18n/
     		http://blog.lifw.org/post/26098052
      -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="cacheSeconds" value="120"/>
+        <property name="useCodeAsDefaultMessage" value="false" />
         <property name="basenames">  
             <list>  
                 <value>i18n/messages</value>
@@ -125,12 +140,12 @@
 
 	<!-- 区别：ReloadableResourceBundleMessageSource可以不重起服务器的情况下，读取资源文件，所以可以随时更改资源文件 -->
     <!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="fileEncodings" value="utf-8"/>
+        <property name="defaultEncoding" value="UTF-8"/>
         <property name="cacheSeconds" value="120"/>
         <property name="useCodeAsDefaultMessage" value="false" />
         <property name="basenames">  
             <list>  
-                <value>i18n/messages</value> 
+                <value>classpath:i18n/messages</value>
             </list>  
         </property>
     </bean> -->
@@ -139,6 +154,7 @@
        <property name="cookieMaxAge" value="604800"/>
        <property name="defaultLocale" value="zh_CN"/>
        <property name="cookieName" value="Language"></property>
+       <property name="cookiePath" value="/"/>
      </bean>
     <!-- 基于Session的本地化解析器 -->
     <!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />-->
@@ -147,12 +163,41 @@
     		并设置基于 session 或者 cookie 的参数以便所有页面语言都被切换
     		参考: http://blog.lifw.org/post/26098052 -->
     <mvc:interceptors>
-	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	    		<property name="paramName" value="siteLanguage"/>
+	    	</bean>
 	</mvc:interceptors>
 
+	<mvc:annotation-driven validator="validator" />
+	<mvc:annotation-driven validator="validator" conversion-service="formatService" />
+	<!-- 表单验证国际化 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+	      <property name="validationMessageSource" ref="messageSource"/>
+	</bean>
+	<!-- formatter转换配置 -->
+    <bean id="formatService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <!-- 使用SpringMVC 自带的formatters处理 日期、数字国际化 -->
+                <!--<bean class="org.springframework.format.number.CurrencyStyleFormatter">
+                </bean>
+                <bean class="org.springframework.format.number.NumberStyleFormatter">
+                </bean>
+                <bean class="org.springframework.format.number.PercentStyleFormatter">
+                </bean>
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                </bean> -->
+
+                <bean class="com.ogoodo.valid.formatter.MyDateFormatter" />
+                <bean class="com.ogoodo.valid.formatter.MyCurrencyFormatter" />
+            </set>
+        </property>
+    </bean>
 
     <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
-
+	
+	<!-- 国际化 end -->
 
 
     <!-- 定义全局异常处理器, 只有一个全局异常处理器起作用 -->

@@ -11,7 +11,7 @@ public class User {
     @Size(min = 3, max = 10, message="用户名的长度应该在3和10之间")
 	private String name;
 
-	@Range(min = 10, max = 100, message = "{user.name.null}")
+	@Range(min = 10, max = 100, message = "{user.id.null}")
 	private int age;
 
 	public String getName() {
