@@ -9,6 +9,12 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>springmvcexample Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<springframework.version>4.3.9.RELEASE</springframework.version>
+		<com.fasterxml.jackson.core>2.6.3</com.fasterxml.jackson.core>
+	</properties>
+
 	<dependencies>
 	
 		<dependency>
@@ -45,12 +51,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.9.RELEASE</version>
+			<version>${springframework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.3.9.RELEASE</version>
+			<version>${springframework.version}</version>
 		</dependency>
 
 		<!-- ajax支持 -->
@@ -58,17 +64,17 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
-		    <version>2.6.3</version>
+		    <version>${com.fasterxml.jackson.core}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.6.3</version>
+		    <version>${com.fasterxml.jackson.core}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-annotations</artifactId>
-		    <version>2.6.3</version>
+		    <version>${com.fasterxml.jackson.core}</version>
 		</dependency>
 	  	<!-- jackson end -->
 
@@ -121,6 +127,24 @@
 	      <scope>compile</scope>  
 	    </dependency>
 		<!-- logback end -->
+
+		<!-- 注解表单验证 begin -->
+		<!-- 
+			JSR-303 风格校验
+			JSR-303 是 java 官方推出的一套 Validation 接口。
+			hibernate 给出了一个完整实现。
+		 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.0.Final</version>
+		</dependency>
+		<!-- 注解表单验证 end -->
 
 	</dependencies>
 	

@@ -76,9 +76,17 @@
 	</context-param> -->
   
 
-  
-	<!-- 使用这两个listener要放个空的applicationContext.xml到WEB-INF/目录下,否则会报错 -->
-    <!-- 该监听器将在Web容器启动时激活Spring -->
+    <!-- 
+    		todo:  验证配置继承
+    		如果不设置contextConfigLocation则会用默认的/WEB-INF/applicationContext.xml
+    		The definition of the Root Spring Container shared by all Servlets and Filters
+    		该监听器将在Web容器启动时激活Spring
+     -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/root-context.xml</param-value>
+		</context-param>
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
