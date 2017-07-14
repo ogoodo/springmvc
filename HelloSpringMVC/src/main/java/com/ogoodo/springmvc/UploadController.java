@@ -1,4 +1,4 @@
-package com.yiibai.springmvc; 
+package com.ogoodo.springmvc; 
   
 import java.io.File;  
 import java.io.IOException;  

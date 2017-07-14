@@ -84,7 +84,7 @@
    
      <!-- info log -->  
      <!-- name指定的是包名，这样只操作此包下的log -->
-   <logger name="com.yiibai" additivity="false">  
+   <logger name="com.ogoodo" additivity="false">  
       <level value="INFO"></level>  
       <appender-ref ref="INFO-APPENDER" />  
       <appender-ref ref="console"/>

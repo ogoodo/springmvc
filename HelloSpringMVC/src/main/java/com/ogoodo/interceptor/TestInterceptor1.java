@@ -1,4 +1,4 @@
-package com.yiibai.interceptor;
+package com.ogoodo.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

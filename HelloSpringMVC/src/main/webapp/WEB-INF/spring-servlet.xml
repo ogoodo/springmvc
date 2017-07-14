@@ -15,7 +15,7 @@
     >
 
 	<!-- 指定Sping组件扫描的基本包路径 -->
-	<context:component-scan base-package="com.yiibai" />
+	<context:component-scan base-package="com.ogoodo" />
 	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />
 <!-- 
@@ -27,11 +27,11 @@
 	<mvc:interceptors>
 	   <mvc:interceptor>
 	       <mvc:mapping path="/ajaxTest" />
-	        <bean class="com.yiibai.interceptor.TestInterceptor2" />
+	        <bean class="com.ogoodo.interceptor.TestInterceptor2" />
 	    </mvc:interceptor>
 	    <mvc:interceptor>
 	        <mvc:mapping path="/*" />
-	        <bean class="com.yiibai.interceptor.TestInterceptor1" />
+	        <bean class="com.ogoodo.interceptor.TestInterceptor1" />
 	    </mvc:interceptor>
 	</mvc:interceptors>
 
@@ -83,7 +83,7 @@
 
  
     <!-- 定义全局异常处理器, 只有一个全局异常处理器起作用 -->
-	<bean id="exceptionResolver2" class="com.yiibai.globalexception.OverallExceptionResolver"></bean>
+	<bean id="exceptionResolver2" class="com.ogoodo.globalexception.OverallExceptionResolver"></bean>
 	<!--  -->
 
 </beans>

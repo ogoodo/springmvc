@@ -1,4 +1,4 @@
-package com.yiibai.globalexception;
+package com.ogoodo.globalexception;
 
 @SuppressWarnings("serial")
 public class CustomException extends Exception {

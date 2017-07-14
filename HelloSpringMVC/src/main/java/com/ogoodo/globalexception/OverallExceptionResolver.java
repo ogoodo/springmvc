@@ -1,4 +1,4 @@
-package com.yiibai.globalexception;
+package com.ogoodo.globalexception;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
