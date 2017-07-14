@@ -18,6 +18,11 @@
 	<context:component-scan base-package="com.ogoodo" />
 	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven  validator="validator" />
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+      <property name="validationMessageSource" ref="messageSource"/>
+    </bean> -->
 <!-- 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -81,7 +86,75 @@
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/" cache-period="31556926"/>  
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/" cache-period="31556926"/>  
 
- 
+	<!-- 配置参数校验国际化 -->
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="basenames">
+	      <list>
+	        <value>classpath:/WEB-INF/i18n/messages</value>
+	        <value>classpath:/WEB-INF/i18n/format</value>
+	        <value>classpath:/WEB-INF/i18n/exceptions</value>
+	        <value>classpath:/WEB-INF/i18n/windows</value>
+	      </list>
+	    </property>
+    </bean>
+    <bean id="validateMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <property name="defaultEncoding" value="UTF-8" />  
+        <property name="useCodeAsDefaultMessage" value="true" />  
+        <property name="cacheSeconds" value="10"></property>  
+        <property name="basenames">  
+            <list>
+	        		<value>classpath:/WEB-INF/i18n/messages</value>
+            </list>  
+        </property>  
+	</bean> -->
+
+    <!--国际化：在MVC配置文件中，配置国际化属性文件：-->
+    <!-- 参考: http://www.xdemo.org/spring-i18n/
+    		http://blog.lifw.org/post/26098052
+     -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="120"/>
+        <property name="basenames">  
+            <list>  
+                <value>i18n/messages</value>
+            </list>  
+        </property>
+    </bean>
+
+	<!-- 区别：ReloadableResourceBundleMessageSource可以不重起服务器的情况下，读取资源文件，所以可以随时更改资源文件 -->
+    <!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="fileEncodings" value="utf-8"/>
+        <property name="cacheSeconds" value="120"/>
+        <property name="useCodeAsDefaultMessage" value="false" />
+        <property name="basenames">  
+            <list>  
+                <value>i18n/messages</value> 
+            </list>  
+        </property>
+    </bean> -->
+    <!-- 基于Cookie的本地化解析器 -->
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+       <property name="cookieMaxAge" value="604800"/>
+       <property name="defaultLocale" value="zh_CN"/>
+       <property name="cookieName" value="Language"></property>
+     </bean>
+    <!-- 基于Session的本地化解析器 -->
+    <!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />-->
+    <!-- 想要能够通过超链接等切换语言还需要定义 LocaleChangeInterceptor 拦截器，
+    		该拦截器的作用时拦截所有请求，如果请求中含有 locale 参数，则尝试将 locale 参数解析成 Locale 对象，
+    		并设置基于 session 或者 cookie 的参数以便所有页面语言都被切换
+    		参考: http://blog.lifw.org/post/26098052 -->
+    <mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+	</mvc:interceptors>
+
+
+    <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+
+
     <!-- 定义全局异常处理器, 只有一个全局异常处理器起作用 -->
 	<bean id="exceptionResolver2" class="com.ogoodo.globalexception.OverallExceptionResolver"></bean>
 	<!--  -->
