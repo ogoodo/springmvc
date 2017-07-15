@@ -15,9 +15,10 @@
     >
 
 	<!-- 指定Sping组件扫描的基本包路径 -->
-	<context:component-scan base-package="com.ogoodo" />
+	<context:component-scan base-package="com.ogoodo; com.ogoodo.valid.formatter" />
 	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />
+	<context:annotation-config />
 
 <!-- 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
@@ -151,6 +152,8 @@
 	    	</bean>
 	</mvc:interceptors>
 
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	<mvc:annotation-driven conversion-service="formatService" />
 	<mvc:annotation-driven validator="validator" />
 	<mvc:annotation-driven validator="validator" conversion-service="formatService" />
@@ -162,20 +165,28 @@
 	</bean>
 	<!-- formatter转换配置 -->
     <bean id="formatService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="formatterRegistrars">
+	        <set>
+	            <bean class="com.ogoodo.interceptor.MyFormatterRegistrar">
+	                <constructor-arg name="datePattern" value="yyyy-MM-dd"/>
+	            </bean>
+	        </set>
+	    </property>
+	    <property name="converters">
+	        <set>
+	        </set>
+	    </property>
         <property name="formatters">
             <set>
                 <!-- 使用SpringMVC 自带的formatters处理 日期、数字国际化 -->
-                <!--<bean class="org.springframework.format.number.CurrencyStyleFormatter">
-                </bean>
-                <bean class="org.springframework.format.number.NumberStyleFormatter">
-                </bean>
-                <bean class="org.springframework.format.number.PercentStyleFormatter">
-                </bean>
-                <bean class="org.springframework.format.datetime.DateFormatter">
-                </bean> -->
+                <!--<bean class="org.springframework.format.number.CurrencyStyleFormatter"></bean>
+                <bean class="org.springframework.format.number.NumberStyleFormatter"></bean>
+                <bean class="org.springframework.format.number.PercentStyleFormatter"></bean>
+                <bean class="org.springframework.format.datetime.DateFormatter"></bean> -->
 				<!-- 采用自定义的AnnotationFormatterFactory注入，可以使用注解 -->  
                 <bean class="com.ogoodo.valid.formatter.factory.MyDateFormatAnnotationFormatterFactory" />
-                <bean class="com.ogoodo.valid.formatter.factory.MyPhoneNumberFormatAnnotationFormatterFactory" />
+                <!-- 用另一种形式加载能注入i18n
+                <bean class="com.ogoodo.valid.formatter.factory.MyPhoneNumberFormatAnnotationFormatterFactory" /> -->
                 <!-- 直接注入自定义Formatter无法使用注解 -->
                 <!-- <bean class="com.ogoodo.valid.formatter.factory.MyDateFormatter" />
                 <bean class="com.ogoodo.valid.formatter.MyCurrencyFormatter" /> -->

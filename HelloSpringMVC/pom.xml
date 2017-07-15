@@ -142,12 +142,12 @@
 	    <dependency>
 	      <groupId>org.hibernate</groupId>
 	      <artifactId>hibernate-validator-annotation-processor</artifactId>
-	      <version>5.4.0.Final</version>
+	      <version>5.4.1.Final</version>
 	    </dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.4.0.Final</version>
+			<version>5.4.1.Final</version>
 		</dependency>
 		<!-- 注解表单验证 end -->
 
@@ -165,6 +165,14 @@
 		        <configuration>
 		            <source>1.8</source>
 		            <target>1.8</target>
+		            <!-- 参考: http://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#validator-annotationprocessor-usage -->
+		            <!-- <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.hibernate</groupId>
+                            <artifactId>hibernate-validator-annotation-processor</artifactId>
+                            <version>5.4.1.Final</version>
+                        </path>
+                    </annotationProcessorPaths> -->
 		        </configuration>
 		    </plugin>
 		    <!-- tomcat插件直接使用，就不要在下载tomcat服务器了 -->

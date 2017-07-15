@@ -1,18 +1,49 @@
 package com.ogoodo.valid.formatter.factory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {  
 
-    Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");  
+    Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");
 
-    @Override  
+	@Autowired
+    private ResourceBundleMessageSource messageSource;
+
+	public ResourceBundleMessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	public void setMessageSource(ResourceBundleMessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+
+	private String message;
+
+    public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@Override  
     public String print(MyPhoneNumberModel phoneNumber, Locale locale) {//①格式化  
         if(phoneNumber == null) {  
             return "";  
@@ -36,7 +67,10 @@ public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {
             return phoneNumber;  
         } else {  
             //③如果不匹配 转换失败  
-            throw new IllegalArgumentException(String.format("类型转换失败，需要格式[010-12345678]，但格式是[%s]", text));  
+            // messageSource.setBasename("messageSource");
+	    		String testLocale = messageSource.getMessage(this.message, null, locale);
+	    		String msg = String.format("类型转换失败，需要格式[010-12345678]，但格式是[%s], 自定义message[%s], 从i18n动态获取数据[%s]", text, this.message, testLocale);
+            throw new IllegalArgumentException(msg, new ParseException("解析错误", 1122));
         }  
     }  
 }  

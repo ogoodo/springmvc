@@ -2,6 +2,7 @@ package com.ogoodo.valid;
 
 import java.util.Date;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -24,17 +25,18 @@ public class User {
 
 	// 测试自定义验证
     @NotNull(message="{user.birthday.null}")  
-    @Past(message="{user.birthday.error}")  
+    @Past(message="{user.birthday}")  
     @MyDateFormat //(message="{user.birthday.error}") 
     private Date birthday;//生日  
     
 	// 测试默认验证
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @Past(message="{user.reg.error}")
+//    @Past(message="{user.regdate.error}")
+//    @Future(message = "{user.regdate.error}")
     // @DateTimeFormat(pattern="yyyy-MM-dd", message="{user.reg.error}")  
-    private Date regDate;//注册时间 
+    private Date regdate;//注册时间 
     
-    @MyPhoneNumberFormat
+    @MyPhoneNumberFormat(message="com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat.message")
     private MyPhoneNumberModel phone;
   
     public MyPhoneNumberModel getPhone() {
@@ -49,11 +51,11 @@ public class User {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setRegdate(Date regDate) {
+		this.regdate = regDate;
 	}
     
 	public String getName() {
