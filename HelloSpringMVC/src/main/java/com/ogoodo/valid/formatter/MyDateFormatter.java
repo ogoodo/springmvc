@@ -20,7 +20,7 @@ public class MyDateFormatter implements Formatter<Date> {
             return df.parse(s);
         } catch (ParseException e) {
             throw new IllegalArgumentException(
-                    "invalid date format.");
+                    "invalid date format(错误的日期格式)");
         }
     }
 

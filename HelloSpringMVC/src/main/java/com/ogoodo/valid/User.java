@@ -1,9 +1,17 @@
 package com.ogoodo.valid;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ogoodo.valid.formatter.factory.MyDateFormat;
+import com.ogoodo.valid.formatter.factory.PhoneNumber;
+import com.ogoodo.valid.formatter.factory.PhoneNumberModel;
 
 public class User {
 	
@@ -14,6 +22,40 @@ public class User {
 	@Range(min = 10, max = 100, message = "{user.id.null}")
 	private int age;
 
+	// 测试自定义验证
+    @NotNull(message="{user.birthday.null}")  
+    @Past(message="{user.birthday.error}")  
+    @MyDateFormat  
+    private Date birthday;//生日  
+    
+	// 测试默认验证
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Past(message="{user.reg.error}")
+    // @DateTimeFormat(pattern="yyyy-MM-dd", message="{user.reg.error}")  
+    private Date regDate;//注册时间 
+    
+    @PhoneNumber
+    private PhoneNumberModel phone;
+  
+    public PhoneNumberModel getPhone() {
+		return phone;
+	}
+	public void setPhone(PhoneNumberModel phone) {
+		this.phone = phone;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+    
 	public String getName() {
 		return name;
 	}

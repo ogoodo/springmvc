@@ -26,16 +26,19 @@ public class ValidController {
 //	private ReloadableResourceBundleMessageSource messageSource;
 	
 	/**
-	 * 验证:  http://localhost:8080/HelloSpringMVC/valid?name=chen&age=35
+	 * 验证:  
+	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chen&age=12&birthday=2012-12-12%2010:10:10&regDate=2013-11-11&phone=010-12345678&siteLanguage=zh_US
 	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1&siteLanguage=en_US
 	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1&siteLanguage=zh_CN
+	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chenchenchen&age=1&birthday=2012-12-12%2010:10:10&siteLanguage=zh_US
 	 */
 	@ResponseBody
 	@RequestMapping(value="/valid")
 	public Map<String,Object> saveRegistration(@Valid User user, BindingResult result, Locale locale){
 		
 		Locale locale2 = LocaleContextHolder.getLocale();
-        System.out.println("testi18n:" + messageSource.getMessage("user.id.null", null, locale));
+		String testLocale = messageSource.getMessage("user.id.null", null, locale);
+        System.out.println("testi18n:" + testLocale);
         System.out.println("当前国际化:" + locale2 + ", " + locale);
 
 		if(result.hasErrors()) {
@@ -52,15 +55,18 @@ public class ValidController {
             for (FieldError fieldError2 : list) {
                 data.put(fieldError2.getField(), fieldError2.getDefaultMessage());
             }  
+            System.out.println("error{{");
             List<ObjectError> ls = result.getAllErrors();  
             for (int i = 0; i < ls.size(); i++) {  
                 System.out.println("error:"+ls.get(i).getDefaultMessage());  
             } 
+            System.out.println("error}}");
 	        map.put("code", "10004");
 	        map.put("msg", "请求参数校验失败！！！");
 	        map.put("data", data);
-	        map.put("msgs","user.id.null");
+	        map.put("msgs1","user.id.null");
 	        map.put("msgs2","{user.id.null}");
+	        map.put("msgs3", testLocale);
 	        return map;
 		}
 
