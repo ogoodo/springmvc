@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ogoodo.valid.formatter.factory.MyDateFormat;
-import com.ogoodo.valid.formatter.factory.PhoneNumber;
-import com.ogoodo.valid.formatter.factory.PhoneNumberModel;
+import com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat;
+import com.ogoodo.valid.formatter.factory.MyPhoneNumberModel;
 
 public class User {
 	
@@ -25,7 +25,7 @@ public class User {
 	// 测试自定义验证
     @NotNull(message="{user.birthday.null}")  
     @Past(message="{user.birthday.error}")  
-    @MyDateFormat  
+    @MyDateFormat //(message="{user.birthday.error}") 
     private Date birthday;//生日  
     
 	// 测试默认验证
@@ -34,13 +34,13 @@ public class User {
     // @DateTimeFormat(pattern="yyyy-MM-dd", message="{user.reg.error}")  
     private Date regDate;//注册时间 
     
-    @PhoneNumber
-    private PhoneNumberModel phone;
+    @MyPhoneNumberFormat
+    private MyPhoneNumberModel phone;
   
-    public PhoneNumberModel getPhone() {
+    public MyPhoneNumberModel getPhone() {
 		return phone;
 	}
-	public void setPhone(PhoneNumberModel phone) {
+	public void setPhone(MyPhoneNumberModel phone) {
 		this.phone = phone;
 	}
 	public Date getBirthday() {

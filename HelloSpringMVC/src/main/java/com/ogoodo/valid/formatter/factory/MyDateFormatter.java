@@ -1,4 +1,4 @@
-package com.ogoodo.valid.formatter;
+package com.ogoodo.valid.formatter.factory;
 
 import org.springframework.format.Formatter;
 

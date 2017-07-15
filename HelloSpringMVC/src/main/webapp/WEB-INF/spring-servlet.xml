@@ -175,9 +175,9 @@
                 </bean> -->
 				<!-- 采用自定义的AnnotationFormatterFactory注入，可以使用注解 -->  
                 <bean class="com.ogoodo.valid.formatter.factory.MyDateFormatAnnotationFormatterFactory" />
-                <bean class="com.ogoodo.valid.formatter.factory.PhoneNumberFormatAnnotationFormatterFactory" />
+                <bean class="com.ogoodo.valid.formatter.factory.MyPhoneNumberFormatAnnotationFormatterFactory" />
                 <!-- 直接注入自定义Formatter无法使用注解 -->
-                <!-- <bean class="com.ogoodo.valid.formatter.MyDateFormatter" />
+                <!-- <bean class="com.ogoodo.valid.formatter.factory.MyDateFormatter" />
                 <bean class="com.ogoodo.valid.formatter.MyCurrencyFormatter" /> -->
             </set>
         </property>

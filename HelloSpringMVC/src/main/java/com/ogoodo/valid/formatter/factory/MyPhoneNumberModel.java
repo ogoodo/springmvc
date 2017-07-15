@@ -1,7 +1,7 @@
 package com.ogoodo.valid.formatter.factory;
 
 
-public class PhoneNumberModel {  
+public class MyPhoneNumberModel {  
 	private String areaCode; 
     private String phoneNumber;
 	public String getAreaCode() {

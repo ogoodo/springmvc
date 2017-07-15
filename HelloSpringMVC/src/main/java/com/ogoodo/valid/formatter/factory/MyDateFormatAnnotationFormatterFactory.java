@@ -1,6 +1,5 @@
 package com.ogoodo.valid.formatter.factory;
 
-import com.ogoodo.valid.formatter.MyDateFormatter;
 import org.springframework.format.AnnotationFormatterFactory;
 import org.springframework.format.Formatter;
 import org.springframework.format.Parser;

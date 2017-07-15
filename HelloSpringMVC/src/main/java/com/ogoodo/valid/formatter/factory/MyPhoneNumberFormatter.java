@@ -8,10 +8,12 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PhoneNumberFormatter implements Formatter<PhoneNumberModel> {  
+public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {  
+
     Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");  
+
     @Override  
-    public String print(PhoneNumberModel phoneNumber, Locale locale) {//①格式化  
+    public String print(MyPhoneNumberModel phoneNumber, Locale locale) {//①格式化  
         if(phoneNumber == null) {  
             return "";  
         }  
@@ -20,7 +22,7 @@ public class PhoneNumberFormatter implements Formatter<PhoneNumberModel> {
     }  
   
     @Override  
-    public PhoneNumberModel parse(String text, Locale locale) throws ParseException {//②解析  
+    public MyPhoneNumberModel parse(String text, Locale locale) throws ParseException {//②解析  
         if(!StringUtils.hasLength(text)) {  
             //①如果source为空 返回null  
             return null;  
@@ -28,7 +30,7 @@ public class PhoneNumberFormatter implements Formatter<PhoneNumberModel> {
         Matcher matcher = pattern.matcher(text);  
         if(matcher.matches()) {  
             //②如果匹配 进行转换  
-            PhoneNumberModel phoneNumber = new PhoneNumberModel();  
+            MyPhoneNumberModel phoneNumber = new MyPhoneNumberModel();  
             phoneNumber.setAreaCode(matcher.group(1));  
             phoneNumber.setPhoneNumber(matcher.group(2));  
             return phoneNumber;  
