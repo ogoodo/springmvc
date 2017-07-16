@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.number.PercentFormatter;
 
 import com.ogoodo.valid.formatter.factory.MyDateFormat;
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat;
@@ -23,12 +24,13 @@ public class User {
 	@Range(min = 10, max = 100, message = "{user.id.null}")
 	private int age;
 
+	private PercentFormatter xx;
 	// 测试自定义验证
-    @NotNull(message="{user.birthday.null}")  
-    @Past(message="{user.birthday}")  
+    // @NotNull(message="{user.birthday.null}")  
+    // @Past(message="{user.birthday}")  
     @MyDateFormat //(message="{user.birthday.error}") 
     private Date birthday;//生日  
-    
+
 	// 测试默认验证
     @DateTimeFormat(pattern="yyyy-MM-dd")
 //    @Past(message="{user.regdate.error}")
@@ -36,7 +38,7 @@ public class User {
     // @DateTimeFormat(pattern="yyyy-MM-dd", message="{user.reg.error}")  
     private Date regdate;//注册时间 
     
-    @MyPhoneNumberFormat(message="com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat.message")
+    @MyPhoneNumberFormat(message="{user.phone.error}")
     private MyPhoneNumberModel phone;
   
     public MyPhoneNumberModel getPhone() {

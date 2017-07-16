@@ -33,6 +33,7 @@
 	    </mvc:interceptor>
 	    <mvc:interceptor>
 	        <mvc:mapping path="/*" />
+	        <mvc:exclude-mapping path="/admin/**"/>
 	        <bean class="com.ogoodo.interceptor.TestInterceptor1" />
 	    </mvc:interceptor>
 	</mvc:interceptors>
@@ -194,6 +195,15 @@
         </property>
     </bean>
 
+	<bean id="webBindingInitializer"   
+	class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">  
+	        <property name="conversionService" ref="formatService"/>  
+	        <property name="validator" ref="validator"/>  
+	</bean> 
+	
+	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+	    <constructor-arg index="0" ref="messageSource"/>
+	</bean> 
 	
 	<!-- 国际化 end -->
 

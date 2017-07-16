@@ -2,9 +2,11 @@ package com.ogoodo.valid.formatter.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,8 +25,16 @@ public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {
 
     Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");
 
-	@Autowired
+	@Autowired // todo: 这个地方怎么注解不进来？？？
+	@Qualifier("messageSource")
+    private ResourceBundleMessageSource messageSource2;
+	@Autowired // todo: 这个地方怎么注解不进来？？？
+    private MessageSource messageSource3;
     private ResourceBundleMessageSource messageSource;
+	@Autowired
+	private MessageSourceAccessor messageAccessor;
+	@Autowired
+	private ResourceBundleMessageSource mensajes;
 
 	public ResourceBundleMessageSource getMessageSource() {
 		return messageSource;
@@ -57,7 +68,7 @@ public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {
         if(!StringUtils.hasLength(text)) {  
             //①如果source为空 返回null  
             return null;  
-        }  
+        }
         Matcher matcher = pattern.matcher(text);  
         if(matcher.matches()) {  
             //②如果匹配 进行转换  
@@ -66,11 +77,13 @@ public class MyPhoneNumberFormatter implements Formatter<MyPhoneNumberModel> {
             phoneNumber.setPhoneNumber(matcher.group(2));  
             return phoneNumber;  
         } else {  
+//    			ParsePosition position = new ParsePosition(0);
+//        		throw new ParseException("电话转换异常:" + text, position.getIndex());
             //③如果不匹配 转换失败  
             // messageSource.setBasename("messageSource");
 	    		String testLocale = messageSource.getMessage(this.message, null, locale);
 	    		String msg = String.format("类型转换失败，需要格式[010-12345678]，但格式是[%s], 自定义message[%s], 从i18n动态获取数据[%s]", text, this.message, testLocale);
             throw new IllegalArgumentException(msg, new ParseException("解析错误", 1122));
-        }  
+        }
     }  
 }  

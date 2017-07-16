@@ -14,7 +14,6 @@ import java.util.Set;
 //①指定可以解析/格式化的字段注解类型  
 public class MyPhoneNumberFormatAnnotationFormatterFactory implements AnnotationFormatterFactory<MyPhoneNumberFormat> {
 
-	@Autowired
     private ResourceBundleMessageSource messageSource;
 
 	public ResourceBundleMessageSource getMessageSource() {

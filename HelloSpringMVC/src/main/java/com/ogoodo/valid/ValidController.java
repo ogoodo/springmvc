@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class ValidController {
 
 	@Autowired
     private ResourceBundleMessageSource messageSource;
+	@Autowired
+	private MessageSourceAccessor messageAccessor;
 //	private ReloadableResourceBundleMessageSource messageSource;
 	
 	/**
@@ -38,35 +41,34 @@ public class ValidController {
 		
 		Locale locale2 = LocaleContextHolder.getLocale();
 		String testLocale = messageSource.getMessage("user.id.null", null, locale);
-        System.out.println("testi18n:" + testLocale);
+        System.out.println("当前国际化:" + testLocale);
         System.out.println("当前国际化:" + locale2 + ", " + locale);
 
 		if(result.hasErrors()) {
 	        Map<String,Object> map=new HashMap<String,Object>(); 
             Map<String,Object> data = new HashMap<String, Object>();
-//	        for(FieldError err : result.getAllErrors()) {
-//	        		err.getField();
-//	        		err.getDefaultMessage();
-//	        }
-            FieldError fieldError= result.getFieldError();  
-            System.out.println(fieldError.getDefaultMessage());  
-              
+
             List<FieldError> list = result.getFieldErrors();  
-            for (FieldError fieldError2 : list) {
-                data.put(fieldError2.getField(), fieldError2.getDefaultMessage());
+            for (FieldError err : list) {
+                data.put(err.getField(), err.getDefaultMessage());
             }  
             System.out.println("error{{");
             List<ObjectError> ls = result.getAllErrors();  
-            for (int i = 0; i < ls.size(); i++) {  
-                System.out.println("error:"+ls.get(i).getDefaultMessage());  
-            } 
+            for (ObjectError err : ls) {
+                System.out.println("error:"+ err.getCode() +"," + err.getObjectName() + err.getDefaultMessage());
+                // 这里要这样调用,参考: https://stackoverflow.com/questions/2751603/how-to-get-error-text-in-controller-from-bindingresult
+                String message = messageSource.getMessage(err, locale);
+                // String msg = messageSource.getMessage(err.getCode(), err.getArguments(), err.getDefaultMessage(), locale);
+                System.out.println("    " + message + "\n");
+                // System.out.println(msg);
+            }
             System.out.println("error}}");
 	        map.put("code", "10004");
 	        map.put("msg", "请求参数校验失败！！！");
 	        map.put("data", data);
 	        map.put("msgs1","user.id.null");
 	        map.put("msgs2","{user.id.null}");
-	        map.put("msgs3", testLocale);
+	        // map.put("msgs3", testLocale);
 	        return map;
 		}
 

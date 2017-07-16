@@ -25,7 +25,7 @@ import com.ogoodo.valid.formatter.factory.MyPhoneNumberFormatter;
 @ComponentScan(basePackages = {"com.ogoodo.valid"})
 @Configuration // @Configuration, this will let spring know this contains bean definitions
 @EnableWebMvc // @EnableWebMVC 效果同 <mvc:annotation-driven/>
-public class MVCConfiguration extends WebMvcConfigurerAdapter {  
+public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {  
 
 	@Autowired
     private ResourceBundleMessageSource messageSource;
@@ -45,11 +45,15 @@ public class MVCConfiguration extends WebMvcConfigurerAdapter {
 		// registry.addFormatter((Formatter<?>) new MyPhoneNumberFormatAnnotationFormatterFactory());
         // Add formatters and/or converters
     }
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-    		System.out.println("消息转换:configureMessageConverters");
+    		System.out.println("==========================消息转换:configureMessageConverters");
     }
-    
+//    @Override
+//    public void validate(Object target, Errors errors) {
+//    	
+//    }
 //    @Bean
 //    public FormattingConversionService conversionService() {
 //

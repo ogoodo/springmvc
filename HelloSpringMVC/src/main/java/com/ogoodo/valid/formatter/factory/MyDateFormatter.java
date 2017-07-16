@@ -15,19 +15,16 @@ public class MyDateFormatter implements Formatter<Date> {
     @Override
     public Date parse(String s, Locale locale) throws ParseException{
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale);
-        System.out.println("parse");
         try {
             return df.parse(s);
         } catch (ParseException e) {
-            throw new IllegalArgumentException(
-                    "invalid date format(错误的日期格式)");
+            throw new IllegalArgumentException("invalid date format(错误的日期格式)");
         }
     }
 
     @Override
     public String print(Date date, Locale locale) {
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale);
-        System.out.println("format");
         return df.format(date);
     }
 
