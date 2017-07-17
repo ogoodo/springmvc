@@ -9,16 +9,18 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.number.PercentFormatter;
 
 import com.ogoodo.valid.formatter.factory.MyDateFormat;
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat;
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberModel;
+import com.ogoodo.valid.validator.MyTel;
 
 public class User {
 	
 	@NotNull
-    @Size(min = 3, max = 10, message="用户名的长度应该在3和10之间")
+    @Size(min = 3, max = 10, message="{my.user.name.null}")
 	private String name;
 
 	@Range(min = 10, max = 100, message = "{user.id.null}")
@@ -38,10 +40,19 @@ public class User {
     // @DateTimeFormat(pattern="yyyy-MM-dd", message="{user.reg.error}")  
     private Date regdate;//注册时间 
     
-    @MyPhoneNumberFormat(message="{user.phone.error}")
+    @MyPhoneNumberFormat(min = 8, max = 9, message="{user.phone.error}")
     private MyPhoneNumberModel phone;
   
-    public MyPhoneNumberModel getPhone() {
+    @MyTel(message="{my.user.tel.min}", min=3)
+    private String myTel;
+    
+    public String getTel() {
+		return myTel;
+	}
+	public void setTel(String tel) {
+		this.myTel = tel;
+	}
+	public MyPhoneNumberModel getPhone() {
 		return phone;
 	}
 	public void setPhone(MyPhoneNumberModel phone) {

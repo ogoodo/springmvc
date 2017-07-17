@@ -2,6 +2,7 @@ package com.ogoodo.valid;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,9 @@ public class ValidController {
 	@Autowired
 	private MessageSourceAccessor messageAccessor;
 //	private ReloadableResourceBundleMessageSource messageSource;
-	
+	/**
+	 * 经验: 表单验证要用ConstraintValidator, 搞了两天用formatters方向错了,报错格式老是有异常,浪费整整周末两天时间
+	 */
 	/**
 	 * 验证:  
 	 * 		 http://localhost:8080/HelloSpringMVC/valid?name=chen&age=12&birthday=2012-12-12%2010:10:10&regDate=2013-11-11&phone=010-12345678&siteLanguage=zh_US
@@ -53,13 +56,17 @@ public class ValidController {
                 data.put(err.getField(), err.getDefaultMessage());
             }  
             System.out.println("error{{");
-            List<ObjectError> ls = result.getAllErrors();  
-            for (ObjectError err : ls) {
-                System.out.println("error:"+ err.getCode() +"," + err.getObjectName() + err.getDefaultMessage());
+            // List<ObjectError> ls = result.getAllErrors();  
+            for (FieldError err : result.getFieldErrors()) {
+                System.out.println("error.name: " + err.getObjectName() + "." + err.getField());
+                System.out.println("error.code: " + Arrays.toString(err.getCodes()));
+                System.out.println("error.msg: " + err.getDefaultMessage());
                 // 这里要这样调用,参考: https://stackoverflow.com/questions/2751603/how-to-get-error-text-in-controller-from-bindingresult
+                String tt = err.getArguments()[0].toString();
                 String message = messageSource.getMessage(err, locale);
                 // String msg = messageSource.getMessage(err.getCode(), err.getArguments(), err.getDefaultMessage(), locale);
-                System.out.println("    " + message + "\n");
+                System.out.println("error.i18n: " + message);
+                System.out.println("");
                 // System.out.println(msg);
             }
             System.out.println("error}}");

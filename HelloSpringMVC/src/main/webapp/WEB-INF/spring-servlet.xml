@@ -157,12 +157,18 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	<mvc:annotation-driven conversion-service="formatService" />
 	<mvc:annotation-driven validator="validator" />
-	<mvc:annotation-driven validator="validator" conversion-service="formatService" />
+	<!-- <mvc:annotation-driven validator="validator" conversion-service="formatService" /> -->
 	<!-- 表单验证国际化 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
 	      <!--指定国际化配置文件 不设置则默认为classpath下的 ValidationMessages.properties -->
 	      <property name="validationMessageSource" ref="messageSource"/>
+	      <!-- <property name="messageInterpolator">
+	          <bean class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator" />
+	      </property> -->
+	      <!-- <property name="messageInterpolator">
+	          <bean class="com.ogoodo.interceptor.MyMessageSourceMessageInterpolator" />
+	      </property> -->
 	</bean>
 	<!-- formatter转换配置 -->
     <bean id="formatService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
