@@ -11,8 +11,8 @@ import javax.validation.Payload;
 
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy=MyTelValidator.class)
-public @interface MyTel {
+@Constraint(validatedBy=MyMobileValidator.class)
+public @interface MyMobile {
 
     int min() default 0;
     

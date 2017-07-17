@@ -11,12 +11,10 @@ import javax.validation.Payload;
 
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy=MyTelValidator.class)
-public @interface MyTel {
+@Constraint(validatedBy=MyMinValidator.class)
+public @interface MyMin {
 
     int min() default 0;
-    
-    String pattern() default "defaultPattern";
 
     String message();
 

@@ -30,6 +30,10 @@ public class ValidController {
 //	private ReloadableResourceBundleMessageSource messageSource;
 	/**
 	 * 经验: 表单验证要用ConstraintValidator, 搞了两天用formatters方向错了,报错格式老是有异常,浪费整整周末两天时间
+	 * 如果同时存在ConstraintValidator和formatters, 那么两个都会执行,先执行formatters在执行ConstraintValidator
+	 * ,如果两个都不通过, 那就只会有formatters的报错信息, formatters的报错信息带了异常, 返回给用户不友好, 处理方式
+	 * 1. 从一长串异常错误里, 用特定的分割符, 提取有用的信息， 这样可以不写ConstraintValidator
+	 * 2. 让formatters不报错, 在ConstraintValidator做检测不通过， 这样就要多写个ConstraintValidator
 	 */
 	/**
 	 * 验证:  

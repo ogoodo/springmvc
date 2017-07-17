@@ -12,39 +12,32 @@ import org.springframework.util.StringUtils;
 
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberModel;
 
-// 这里MyPhoneNumberModel改为String就可以验证String了
-public class MyTelValidator implements ConstraintValidator<MyTel, MyPhoneNumberModel> {
+public class MyMobileValidator implements ConstraintValidator<MyMobile, String> {
 
     Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");
 
     @Resource
     private ResourceBundleMessageSource messageSource;
     
-    private MyTel myTel;
+    private MyMobile myTel;
     
     @Override
-    public void initialize(MyTel myTel) {
+    public void initialize(MyMobile myTel) {
         this.myTel = myTel;
     }
 
     @Override
-    public boolean isValid(MyPhoneNumberModel value, ConstraintValidatorContext constraintContext) {
+    public boolean isValid(String value, ConstraintValidatorContext constraintContext) {
         boolean isValid;
-//        if(!StringUtils.hasLength(value)) {  
-//             value = "";
-//        }
-//        Matcher matcher = pattern.matcher(value.getPhoneNumber());  
-//        if(matcher.matches()) { 
-//            isValid = true;
-//        } else {
-//            isValid = false;
-//        }
-        if(value == null) { 
-          isValid = true;
-          isValid = false;
-      } else {
-          isValid = false;
-      }
+        if(!StringUtils.hasLength(value)) {  
+             value = "";
+        }
+        Matcher matcher = pattern.matcher(value);  
+        if(matcher.matches()) { 
+            isValid = true;
+        } else {
+            isValid = false;
+        }
         
         if(!isValid) {
             constraintContext.disableDefaultConstraintViolation();

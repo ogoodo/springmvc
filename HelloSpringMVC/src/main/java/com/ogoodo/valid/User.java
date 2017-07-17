@@ -15,6 +15,8 @@ import org.springframework.format.number.PercentFormatter;
 import com.ogoodo.valid.formatter.factory.MyDateFormat;
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberFormat;
 import com.ogoodo.valid.formatter.factory.MyPhoneNumberModel;
+import com.ogoodo.valid.validator.MyMin;
+import com.ogoodo.valid.validator.MyMobile;
 import com.ogoodo.valid.validator.MyTel;
 
 public class User {
@@ -23,7 +25,7 @@ public class User {
     @Size(min = 3, max = 10, message="{my.user.name.null}")
 	private String name;
 
-	@Range(min = 10, max = 100, message = "{user.id.null}")
+	@Range(min = 10, max = 100, message = "{my.user.age}")
 	private int age;
 
 	private PercentFormatter xx;
@@ -41,17 +43,23 @@ public class User {
     private Date regdate;//注册时间 
     
     @MyPhoneNumberFormat(min = 8, max = 9, message="{user.phone.error}")
+    @MyTel(message="{my.user.tel}", min=3)
     private MyPhoneNumberModel phone;
   
-    @MyTel(message="{my.user.tel.min}", min=3)
-    private String myTel;
+    @MyMobile(message="{my.user.mymobile}", min=3, pattern="XXX?-XXXXXXX?")
+    private String mobile;
+
+    @MyMin(message="{my.user.min}", min=3)
+    private String mymin;
     
-    public String getTel() {
-		return myTel;
+    public String getMobile() {
+		return mobile;
 	}
-	public void setTel(String tel) {
-		this.myTel = tel;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
+
+ 
 	public MyPhoneNumberModel getPhone() {
 		return phone;
 	}

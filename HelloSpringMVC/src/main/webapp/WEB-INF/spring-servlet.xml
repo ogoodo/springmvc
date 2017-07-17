@@ -157,7 +157,8 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	<mvc:annotation-driven conversion-service="formatService" />
 	<mvc:annotation-driven validator="validator" />
-	<!-- <mvc:annotation-driven validator="validator" conversion-service="formatService" /> -->
+	<!-- 下面这行配置一定要两个一起, 否则不起作用 -->
+	<mvc:annotation-driven validator="validator" conversion-service="formatService" />
 	<!-- 表单验证国际化 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
