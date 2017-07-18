@@ -34,6 +34,7 @@ public class ValidController {
 	 * ,如果两个都不通过, 那就只会有formatters的报错信息, formatters的报错信息带了异常, 返回给用户不友好, 处理方式
 	 * 1. 从一长串异常错误里, 用特定的分割符, 提取有用的信息， 这样可以不写ConstraintValidator
 	 * 2. 让formatters不报错, 在ConstraintValidator做检测不通过， 这样就要多写个ConstraintValidator
+	 * 3. 想办法自定义formatters添加报错信息部分代码，这个不知道在哪里干的
 	 */
 	/**
 	 * 验证:  

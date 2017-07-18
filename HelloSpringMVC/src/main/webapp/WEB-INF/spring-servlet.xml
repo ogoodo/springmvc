@@ -164,9 +164,7 @@
 	      <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
 	      <!--指定国际化配置文件 不设置则默认为classpath下的 ValidationMessages.properties -->
 	      <property name="validationMessageSource" ref="messageSource"/>
-	      <!-- <property name="messageInterpolator">
-	          <bean class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator" />
-	      </property> -->
+	      <!-- 这里能注入进去 -->
 	      <!-- <property name="messageInterpolator">
 	          <bean class="com.ogoodo.interceptor.MyMessageSourceMessageInterpolator" />
 	      </property> -->

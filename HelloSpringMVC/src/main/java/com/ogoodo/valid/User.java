@@ -31,7 +31,7 @@ public class User {
 	private PercentFormatter xx;
 	// 测试自定义验证
     // @NotNull(message="{user.birthday.null}")  
-    // @Past(message="{user.birthday}")  
+    // @Past(message="{user.birthday}") // 这个是验证过去时间
     @MyDateFormat //(message="{user.birthday.error}") 
     private Date birthday;//生日  
 

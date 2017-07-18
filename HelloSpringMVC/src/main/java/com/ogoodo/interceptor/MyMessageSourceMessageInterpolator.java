@@ -14,6 +14,7 @@ import org.springframework.context.NoSuchMessageException;
  * 解析出来的消息不对
  * 参考: https://stackoverflow.com/questions/4219740/spring-validation-error-generation
  * 可以参考:  http://jinnianshilongnian.iteye.com/blog/1879166
+ * https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html#setMessageCodeFormatter-org.springframework.validation.MessageCodeFormatter-
  * 这里消息不是用ResourceBundleMessageInterpolator类处理的， 不知道哪个类
  * @author chen
  *
