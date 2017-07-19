@@ -32,6 +32,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	
 	// 测试可以 http://localhost:8080/HelloSpringMVC/logintest 
 	// 会重定向到 http://localhost:8080/HelloSpringMVC/helloworld.jsp
+	// <mvc:view-controller path="/" view-name="home"/>
     @Override  
     public void addViewControllers(ViewControllerRegistry registry){  
         registry.addViewController("/logintest").setViewName("helloworld");  
