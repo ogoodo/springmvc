@@ -1,8 +1,9 @@
-package com.ogoodo.test.mysql;
+package com.ogoodo.test.mysql.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ogoodo.test.mysql.User;
 import com.ogoodo.test.mysql.dao.UserDao;
 
 @Service  

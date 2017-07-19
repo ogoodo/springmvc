@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ogoodo.springmvc.HelloWorldController;
+import com.ogoodo.test.mysql.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,17 +34,16 @@ public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	/**
-	 * http://localhost:8080/HelloSpringMVC/test/mysql
+	 * http://localhost:8080/HelloSpringMVC/test/mysql?userid=13
 	 * @param locale
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="/test/mysql")
-	public Map<String,Object> saveRegistration( Locale locale){
-		// org.apache.ibatis.logging.LogFactory.useSlf4jLogging();
+	public Map<String,Object> saveRegistration(int userid, Locale locale){
         Map<String,Object> map=new HashMap<String,Object>();
 		try {
-			User user = userService.selectUserById(13);  
+			User user = userService.selectUserById(userid);  
 			map.put("data", user);
 	        logger.debug("查找结果" + user);
 		} catch(Exception ex) {

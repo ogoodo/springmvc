@@ -1,4 +1,6 @@
-package com.ogoodo.test.mysql;
+package com.ogoodo.test.mysql.service;
+
+import com.ogoodo.test.mysql.User;
 
 public interface UserService {
 	
