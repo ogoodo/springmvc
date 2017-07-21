@@ -135,8 +135,8 @@
 
 	
     <root>
-        <!-- <level value="DEBUG" /> -->
-        <level value="TRACE" />
+        <level value="DEBUG" />
+        <!-- <level value="TRACE" /> -->
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="ERROR_FILE" />

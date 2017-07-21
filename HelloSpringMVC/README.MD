@@ -3,7 +3,16 @@
 2.表单验证
 3.国际化
 4.logback日志
+5.mysql+MyBatis
+定时任务
+权限
+redis
+分库分表
+分布式事务
+微服务
 
+启动redis
+redis-server /usr/local/etc/redis.conf
 
 ### 构建项目第一步
 
