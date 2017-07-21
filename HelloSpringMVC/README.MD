@@ -4,9 +4,9 @@
 3.国际化
 4.logback日志
 5.mysql+MyBatis
+6.redis
 定时任务
-权限
-redis
+权限shiro
 分库分表
 分布式事务
 微服务
