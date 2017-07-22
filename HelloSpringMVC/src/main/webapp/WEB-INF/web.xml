@@ -84,7 +84,7 @@
      -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/root-context.xml</param-value>
+		<param-value>/WEB-INF/root-context.xml, /WEB-INF/shiro-context.xml</param-value>
 		</context-param>
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
@@ -137,4 +137,40 @@ servers/tomcat***/server.xml 设置支持utf-8编码  否则get请求会乱码
      <url-pattern>/*</url-pattern>
  </filter-mapping>
  
+ 	<!-- shiro begin -->
+  	<filter> 
+	      <filter-name>shiroFilter</filter-name>
+	      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter> 
+    <filter-mapping> 
+	      <filter-name>shiroFilter</filter-name>
+	      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+ 	<!-- shiro end -->
+
+<!--  	<http auto-config='true'>
+    <intercept-url pattern="/**" access="ROLE_USER" />
+</http> -->
+
+<!-- 	 <filter>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	  <filter-name>springSecurityFilterChain</filter-name>
+	  <url-pattern>/*</url-pattern> 
+</filter-mapping>-->
+<!-- <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>
+      org.springframework.web.filter.DelegatingFilterProxy
+    </filter-class>
+    <init-param>
+        <param-name>targetBeanName</param-name>
+        <param-value>customFilter</param-value>
+    </init-param>
+</filter> -->
+
+
 </web-app>

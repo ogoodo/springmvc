@@ -4,7 +4,7 @@
 3.国际化
 4.logback日志
 5.mysql+MyBatis
-6.redis
+6.redis  还需要深入下
 定时任务
 权限shiro
 分库分表
