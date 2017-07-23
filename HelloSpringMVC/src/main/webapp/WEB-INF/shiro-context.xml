@@ -62,12 +62,19 @@
                 /test/* = anon
                 /dologin = anon
                 /logout = logout
+                /user.jsp = roles[user]
+                /admin.jsp = roles[admin]
                 /tag = authc
-                /** = authc
+                /** = anon
             </value>
         </property>
+        <!-- <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap" /> -->
     </bean>
     <bean id="shiroLogin" class="com.ogoodo.shiro.ShiroLogin"/>
+    <bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionMapBuilder" factory-method="builderFilterChainDefinitionMap"/>
+    <bean id="filterChainDefinitionMapBuilder" class="com.ogoodo.shiro.FilterChainDefinitionMapBuilder">
+    </bean>
+    <bean id="myShiroService" class="com.ogoodo.shiro.MyShiroService"></bean>
     <!--
        开启Shiro的注解(如@RequiresRoles，@RequiresPermissions)，需借助SpringAOP扫描使用Shiro注解的类，
        并在必要时进行安全逻辑验证

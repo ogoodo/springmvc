@@ -34,14 +34,19 @@ public class MyRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
         //实际中可能会像上面注释的那样从数据库取得
-        if(null!=currentUsername && "mike".equals(currentUsername)){
+        if(null!=currentUsername && "admin".equals(currentUsername)){
             //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
             simpleAuthorInfo.addRole("admin");         
             simpleAuthorInfo.addStringPermission("admin:manage"); //添加权限return simpleAuthorInfo;
         }
+        if(null!=currentUsername && "chen".equals(currentUsername)){
+            //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
+            simpleAuthorInfo.addRole("user");         
+            simpleAuthorInfo.addStringPermission("user:manage"); //添加权限return simpleAuthorInfo;
+        }
         //若该方法什么都不做直接返回null的话,就会导致任何用户访问/admin/listUser.jsp时都会自动跳转到unauthorizedUrl指定的地址
         //详见applicationContext.xml中的<bean id="shiroFilter">的配置
-        return null;
+        return simpleAuthorInfo;
     }
 
     	/**
@@ -62,6 +67,7 @@ public class MyRealm extends AuthorizingRealm {
     	//模拟从数据库取得的信息
     	String password="123456";
     	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
+    	// MD5盐值加密生成复杂密码
     	Object saltPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(userId), 1024);
 
     	ByteSource credSalt = ByteSource.Util.bytes(userId);

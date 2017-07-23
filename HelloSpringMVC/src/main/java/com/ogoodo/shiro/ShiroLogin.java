@@ -1,5 +1,7 @@
 package com.ogoodo.shiro;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -13,6 +15,7 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,17 @@ import com.ogoodo.springmvc.HelloWorldController;
 public class ShiroLogin {
 
 	private static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+
+	@Autowired
+	private MyShiroService myShiroService;
+    
+   @RequestMapping(value = "/test/shiroAnnotation")
+   @ResponseBody
+   public String shiroAnnotation(HttpSession session) {
+	   session.setAttribute("key", "value123");
+	   myShiroService.testMethod();
+	   return "redirect:/list.jsp";
+    }
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
      * 实际的登录代码
