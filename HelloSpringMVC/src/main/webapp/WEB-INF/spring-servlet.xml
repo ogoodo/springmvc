@@ -28,7 +28,7 @@
 	<context:annotation-config />
 
 	<!-- 启用注解驱动的定时任务 -->
-	<task:annotation-driven scheduler="myScheduler"/>
+	<!-- <task:annotation-driven scheduler="myScheduler"/> -->
 	<!-- 推荐配置线程池，若不配置多任务下会有问题。后面会详细说明单线程的问题 -->
 	<task:scheduler id="myScheduler" pool-size="3"/> 
 	
@@ -94,7 +94,8 @@
     <!-- 对静态资源文件的访问-->  
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/" cache-period="31556926"/>  
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/" cache-period="31556926"/>  
-    <mvc:resources mapping="/css/**" location="/WEB-INF/css/" cache-period="31556926"/>  
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/" cache-period="31556926"/>
+    <mvc:resources mapping="/**" location="/WEB-INF/pages/" cache-period="31556926"/>
 
 	<!-- 配置参数校验国际化 -->
     <!-- 国际化 begin -->

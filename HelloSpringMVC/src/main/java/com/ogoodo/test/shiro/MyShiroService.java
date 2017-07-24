@@ -1,4 +1,4 @@
-package com.ogoodo.shiro;
+package com.ogoodo.test.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;

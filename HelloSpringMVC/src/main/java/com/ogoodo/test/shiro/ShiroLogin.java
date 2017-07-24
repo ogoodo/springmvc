@@ -1,4 +1,4 @@
-package com.ogoodo.shiro;
+package com.ogoodo.test.shiro;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,14 +31,22 @@ public class ShiroLogin {
 
 	@Autowired
 	private MyShiroService myShiroService;
-    
-   @RequestMapping(value = "/test/shiroAnnotation")
-   @ResponseBody
-   public String shiroAnnotation(HttpSession session) {
-	   session.setAttribute("key", "value123");
-	   myShiroService.testMethod();
-	   return "redirect:/list.jsp";
-    }
+
+	   @RequestMapping(value = "/test/shiro/annotation.do")
+	   @ResponseBody
+	   public String shiroAnnotation(HttpSession session) {
+		   session.setAttribute("key", "value123");
+		   myShiroService.testMethod();
+		   return "redirect:/test/shiro/list.jsp";
+	    }
+
+	   @RequestMapping(value = "/test/shiro/logout.do")
+	   public String logout() {
+		   Subject subject = SecurityUtils.getSubject();  
+		   subject.logout(); 
+		   return "redirect:/test/shiro/login.jsp";
+	    }
+
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
      * 实际的登录代码
@@ -48,9 +56,9 @@ public class ShiroLogin {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/dologin")
-    @ResponseBody
-    public String doLogin(String username, String password, Model model) {
+    @RequestMapping(value = "/test/shiro/login.do")
+    // @ResponseBody
+    public String shiroLogin(String username, String password, Model model) {
     		// HttpRequest request,
     		logger.debug("doLogin");
         String msg = "";
@@ -61,12 +69,12 @@ public class ShiroLogin {
 //        String password = "123456";
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        token.setRememberMe(true);
+        // token.setRememberMe(true);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
             if (subject.isAuthenticated()) {
-                return "redirect:/";
+                return "redirect:./list.jsp";
             } else {
                 return "login";
             }

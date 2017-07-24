@@ -1,4 +1,4 @@
-package com.ogoodo.shiro;
+package com.ogoodo.test.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -39,7 +39,7 @@ public class MyRealm extends AuthorizingRealm {
             simpleAuthorInfo.addRole("admin");         
             simpleAuthorInfo.addStringPermission("admin:manage"); //添加权限return simpleAuthorInfo;
         }
-        if(null!=currentUsername && "chen".equals(currentUsername)){
+        if(null!=currentUsername && "user".equals(currentUsername)){
             //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
             simpleAuthorInfo.addRole("user");         
             simpleAuthorInfo.addStringPermission("user:manage"); //添加权限return simpleAuthorInfo;
