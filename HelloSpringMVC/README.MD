@@ -45,3 +45,6 @@ servers/tomcat***/server.xml 设置支持utf-8编码  否则get请求会乱码
 mvn tomcat7:deploy 
 mvn tomcat7:undeploy 
 mvn tomcat7:redeploy
+
+### tools
+https://github.com/astarring/mybatis-generator-gui

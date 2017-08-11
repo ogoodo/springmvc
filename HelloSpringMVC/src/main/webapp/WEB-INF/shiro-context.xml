@@ -28,6 +28,9 @@
     				<property name="hashIterations" value="1024"></property>
     			</bean>
     		</property>
+    		<property name="rolePermissionResolver" >
+    			<bean class="com.ogoodo.test.shiro.MyRolePermissionResolver" />
+    		</property>
     </bean>
 
     <!-- Shiro安全管理器 -->
@@ -64,6 +67,7 @@
                 /logout = logout
                 /user.jsp = roles[user]
                 /admin.jsp = roles[admin]
+                /admin/add = anyPerms["admin:delete","admin:add"]
                 /tag = authc
                 /** = anon
             </value>
@@ -76,7 +80,10 @@
                 </entry> -->
 				<entry key="anyRoles">  
                     <bean class="com.ogoodo.test.shiro.MyAnyRolesAuthorizationFilter" />  
-                </entry>  
+                </entry>
+                <entry key="anyPerms">
+                    <bean class="com.ogoodo.test.shiro.MyAnyPermissionsAuthorizationFilter" />  
+                </entry>
 			</map>
 		</property>
     </bean>

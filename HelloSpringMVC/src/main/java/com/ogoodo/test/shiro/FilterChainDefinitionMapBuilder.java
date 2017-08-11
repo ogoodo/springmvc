@@ -12,6 +12,8 @@ public class FilterChainDefinitionMapBuilder {
 //			map.put("/test/mysql/**", "anon");
 //			map.put("/test/redis/**", "anon");
 
+			map.put("/test/shiro/anyPerms.jsp", "anyPerms[\"admin:delete\",\"admin:add\"]");
+			
 			map.put("/test/shiro/list.jsp", "anon");
 			map.put("/test/shiro/login.do", "anon");
 			map.put("/test/shiro/login.jsp", "anon");
@@ -21,6 +23,7 @@ public class FilterChainDefinitionMapBuilder {
 //			map.put("/test/shiro/user.jsp", "roles[user]");
 			map.put("/test/shiro/admin.jsp", "roles[admin]");
 			map.put("/test/shiro/**", "anon");
+			
 			
 			
 //			map.put("/HelloSpringMVC/test/shiro/list.jsp", "anon");

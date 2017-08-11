@@ -1,5 +1,6 @@
 <beans  
     xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xmlns:tx="http://www.springframework.org/schema/tx"  
     xmlns:context="http://www.springframework.org/schema/context"    
@@ -22,6 +23,7 @@
 	<import resource="shiro-context.xml" />
 
 	<!-- 指定Sping组件扫描的基本包路径 -->
+	<!-- <context:component-scan base-package="com.ogoodo" /> -->
 	<context:component-scan base-package="com.ogoodo; com.ogoodo.valid.formatter" />
 	<!-- 启用MVC注解 -->
 	<mvc:annotation-driven />

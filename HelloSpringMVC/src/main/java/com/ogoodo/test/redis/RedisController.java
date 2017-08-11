@@ -1,4 +1,4 @@
-package com.ogoodo.test.mysql;
+package com.ogoodo.test.redis;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ogoodo.test.mysql.service.UserService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 

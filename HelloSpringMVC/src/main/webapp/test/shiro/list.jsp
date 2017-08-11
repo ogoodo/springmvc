@@ -6,12 +6,13 @@
 <title>Spring4 MVC -HelloWorld</title>
 </head>
 <body>
-	<div>list.jsp</div>
+	<div>list.jsp 测试账号user,admin密码123456</div>
 	<a href="./admin.jsp"> admin.jsp</a><br/>
 	<a href="./user.jsp"> user.jsp</a><br/>
 	<a href="./login.jsp"> login.jsp</a><br/>
 	<a href="./logout.do"> logout.do</a><br/>
 	<a href="./annotation.do"> annotation.do</a><br/>
+	<a href="./anyPerms.jsp"> anyPerms.jsp 测试自定义权限过滤器(admin账号)</a><br/>
 	
 </body>
 </html>

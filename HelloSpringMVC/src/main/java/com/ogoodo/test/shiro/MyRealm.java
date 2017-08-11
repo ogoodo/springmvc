@@ -24,6 +24,9 @@ public class MyRealm extends AuthorizingRealm {
      * 个人感觉若使用了Spring3.1开始提供的ConcurrentMapCache支持,则可灵活决定是否启用AuthorizationCache
      * 比如说这里从数据库获取权限信息时,先去访问Spring3.1提供的缓存,而不使用Shior提供的AuthorizationCache
      */
+	/**
+	 * 本函数其实就是shiro查询当前用户包含了哪些权限
+	 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
         // log.info("-----------------access doGetAuthorizationInfo----------------------");

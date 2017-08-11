@@ -151,6 +151,15 @@
 		</dependency>
 		<!-- 注解表单验证 end -->
 
+		<!-- mybatis-generator-gui begin -->
+		<!-- 无此配置报错: The import javax.persistence cannot be resolved -->
+		<dependency>
+	        <groupId>org.hibernate.javax.persistence</groupId>
+	        <artifactId>hibernate-jpa-2.0-api</artifactId>
+	        <version>1.0.1.Final</version>
+	    </dependency>
+	    <!-- mybatis-generator-gui end -->
+
 		<!-- mysql begin -->
         <!--mybatis依赖 -->  
         <dependency>  
