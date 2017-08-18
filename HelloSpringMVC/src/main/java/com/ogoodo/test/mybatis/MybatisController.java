@@ -1,6 +1,5 @@
 package com.ogoodo.test.mybatis;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -14,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.ogoodo.test.mybatis.pojo.URole;
 import com.ogoodo.test.mybatis.pojo.URoleExample;
 import com.ogoodo.test.mybatis.service.MybatisService;
@@ -59,6 +59,7 @@ public class MybatisController {
 			example.setOffset(page * count);
 			example.setLimit(count);
 			example.setOrderByClause("name desc, type asc");
+			PageHelper.offsetPage(1, 13);
 			List<URole> list = mybatisService.selectByExample(example);
 			map.put("data", list);
 	        logger.debug("查找结果" + list);
@@ -67,6 +68,23 @@ public class MybatisController {
 		}
         map.put("code", "10001");
         map.put("msg", "请求参数校验成功！！！");
+        return map;
+	}
+
+	/**
+	 * http://localhost:8080/HelloSpringMVC/test/mybatis/page-helper?pageNum=1&pageSize=8
+	 */
+	@ResponseBody
+	@RequestMapping(value="/test/mybatis/page-helper")
+	public Map<String,Object> pageHelper(int pageNum, int pageSize, Locale locale){
+        Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			PageHelper.offsetPage(pageNum, pageSize);
+			List<URole> list = mybatisService.selectByExample(null);
+			map = PageUtil.Change(list);
+		} catch(Exception ex) {
+			System.out.println("捕获到错误: " + ex.getMessage());
+		}
         return map;
 	}
 
