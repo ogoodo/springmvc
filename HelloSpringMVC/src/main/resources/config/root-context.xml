@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans
+   xmlns="http://www.springframework.org/schema/beans"  
+   xmlns:beans="http://www.springframework.org/schema/beans"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd">
+   xsi:schemaLocation="
+   		http://www.springframework.org/schema/beans
+   		http://www.springframework.org/schema/beans/spring-beans.xsd
+   ">
  
     <!-- mysql end -->
       <!-- 引入jdbc配置文件 -->    
@@ -44,7 +48,7 @@
 		          <value>classpath*:com/ogoodo/test/mybatis/**/*.xml</value>
 		      </array>
 		</property>
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />  
+        <property name="configLocation" value="classpath:config/mybatis-config.xml" />  
         <property name="plugins">
             <array>
             		<!-- 分页组件 -->
@@ -53,6 +57,7 @@
                     <property name="properties">
                         <value>
                             helperDialect=mysql
+                            reasonable=false
                             <!-- reasonable=false
                             supportMethodsArguments=true
                             params=count=countSql

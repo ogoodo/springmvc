@@ -40,7 +40,7 @@ public class PageTool {
         String methodName = "selectByExample";
 		try {
 			Method m1 = object.getClass().getDeclaredMethod(methodName, example.getClass());
-			PageHelper.offsetPage(pageNum, pageSize);
+			PageHelper.startPage(pageNum, pageSize);
 			@SuppressWarnings("unchecked")
 //			List<T> list2 = (List<T>) m1.invoke(object, new Object[]{null} );
 			List<T> list2 = (List<T>) m1.invoke(object, new Object[]{example} );
