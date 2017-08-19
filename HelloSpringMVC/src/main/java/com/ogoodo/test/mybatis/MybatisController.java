@@ -72,19 +72,23 @@ public class MybatisController {
 	}
 
 	/**
-	 * http://localhost:8080/HelloSpringMVC/test/mybatis/page-helper?pageNum=1&pageSize=8
+	 * http://localhost:8080/HelloSpringMVC/test/mybatis/page-helper?like=ch&pageNum=1&pageSize=8
 	 */
 	@ResponseBody
 	@RequestMapping(value="/test/mybatis/page-helper")
-	public Map<String,Object> pageHelper(int pageNum, int pageSize, Locale locale){
-        Map<String,Object> map = new HashMap<String,Object>();
-		try {
-			PageHelper.offsetPage(pageNum, pageSize);
-			List<URole> list = mybatisService.selectByExample(null);
-			map = PageUtil.Change(list);
-		} catch(Exception ex) {
-			System.out.println("捕获到错误: " + ex.getMessage());
-		}
+	public Map<String,Object> pageHelper(String like, int pageNum, int pageSize, Locale locale){
+//		PageHelper.offsetPage(pageNum, pageSize);
+		// List<URole> list = mybatisService.selectByExample(null);
+//		List<URole> list2 = PageTool.execute(mybatisService, "selectByExample", URoleExample.class);
+//		Map<String,Object> map = PageUtil.Change(list2, "请求参数校验成功！@@");
+
+		URoleExample example = new URoleExample();
+		if(StringUtils.hasText(like)){
+			URoleExample.Criteria criteria = example.createCriteria();  
+			like = "%" + like + "%";
+			criteria.andNameLike(like); 	 
+		}  
+		Map<String,Object> map = PageTool.select(mybatisService, example, pageNum, pageSize, "请求参数校验成功！@1@");
         return map;
 	}
 
