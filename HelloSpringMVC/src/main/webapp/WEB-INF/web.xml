@@ -84,7 +84,12 @@
      -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/root-context.xml,classpath:config/shiro-context.xml</param-value>
+		<!-- <param-value>classpath:config/shiro-context.xml</param-value> -->
+		<param-value>
+			classpath:config/root-context.xml,
+			classpath:config/mysql-context.xml
+			classpath:config/shiro-context.xml
+		</param-value>
 		<!-- <param-value>/WEB-INF/root-context.xml, /WEB-INF/shiro-context.xml</param-value> -->
 		</context-param>
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
